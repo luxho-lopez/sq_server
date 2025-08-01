@@ -26,7 +26,7 @@ if (!$invoice_id) {
         $files = $filesStmt->fetchAll();
 
         // Se obtienen los materiales asociados a la factura
-        $stmt = $pdo->prepare("SELECT im.*, m.material_code, m.name AS material_name,
+        $stmt = $pdo->prepare("SELECT im.*, m.material_code, m.name AS material_name, mu.abbreviation AS unit_abbreviation,
                             COALESCE(
                                 (
                                     SELECT mf.file_path 
@@ -39,6 +39,7 @@ if (!$invoice_id) {
                             ) AS image_path
                             FROM inventory_movements im
                             INNER JOIN materials m ON im.material_id = m.id
+                            LEFT JOIN measurement_units mu ON m.unit_id = mu.id
                             WHERE invoice_id = ? AND im.type = 'entry'
                             ORDER BY im.id ASC");
         $stmt->execute([$invoice_id]);
@@ -118,7 +119,7 @@ if (!$invoice_id) {
                     <td data-label="Código"><?php echo htmlspecialchars($material['material_code']); ?></td>
                     <td data-label="Material"><?php echo htmlspecialchars($material['material_name']); ?></td>
                     <td data-label="Serie"><?php echo htmlspecialchars($material['serial_number']); ?></td>
-                    <td data-label="Cantidad"><?php echo htmlspecialchars($material['quantity']); ?></td>
+                    <td data-label="Cantidad"><?php echo htmlspecialchars($material['quantity']); ?> <?php echo htmlspecialchars($material['unit_abbreviation']); ?></td>
                     <td data-label="Costo"><?php echo htmlspecialchars($material['cost']); ?></td>
                 </tr>
             <?php endforeach; ?>

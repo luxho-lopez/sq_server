@@ -88,9 +88,9 @@ $containers = $pdo->query("SELECT c.*, u.username
                 <td data-label="Estado"><?php echo htmlspecialchars($container['state']); ?></td>
                 <td data-label="Acciones">
                     <div class="actions">
-                        <a href="/main/index.php?page=view_container&container_id=<?php echo $container['id']; ?>" title="Ver">
+                        <!-- <a href="/main/index.php?page=view_container&container_id=<?php echo $container['id']; ?>" title="Ver">
                             <i class="icon fas fa-eye"></i>
-                        </a>
+                        </a> -->
                         <?php if (hasPermission('containers', 'edit')): ?>
                             <a href="/main/index.php?page=edit_container&container_id=<?php echo $container['id']; ?>" title="Editar">
                                 <i class="icon fas fa-edit"></i>

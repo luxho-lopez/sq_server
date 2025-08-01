@@ -19,7 +19,6 @@ $sql_quantity = "SELECT inm.*, m.material_code, m.name, i.invoice_code, mu.abbre
                 LEFT JOIN invoices i ON inm.invoice_id = i.id
                 LEFT JOIN measurement_units mu ON m.unit_id = mu.id
                 LEFT JOIN containers c ON inm.container_id = c.id
-                WHERE m.has_serial = 0
                 ORDER BY inm.movement_date DESC";
 
 // Ejecutar ambas consultas
