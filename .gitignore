@@ -1,0 +1,6 @@
+#Ignora los documentos y archivos de los registros.
+assets/uploads/
+#Ignora los archivos de configuracion de PDF.
+assets/pdf/
+#Ignnora la conexion a la base de datos.
+includes/db.php
